@@ -1,0 +1,128 @@
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+body {
+  background: radial-gradient(circle at top left, #111827, #0f172a);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.neon {
+  color: #e6007e;
+  text-shadow: 0 0 5px #e6007e, 0 0 10px #e6007e, 0 0 20px #ff1493;
+}
+
+.glass {
+  background-color: rgba(17, 24, 39, 0.75); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 25px rgba(230, 0, 126, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.glass:hover {
+  transform: scale(1.01);
+}
+
+/* Estilo para os botões */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background-color: #e6007e;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 0 10px #e6007e;
+  text-align: center;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #ff2fa2;
+  box-shadow: 0 0 20px #ff2fa2, 0 0 30px #ff2fa2;
+  transform: scale(1.05);
+}
+
+/* Ajuste para os botões de salvar e cancelar ficarem mais próximos */
+.flex button {
+  margin-right: 10px; /* Adiciona uma margem direita no botão de salvar */
+}
+
+.flex button:last-child {
+  margin-right: 0; /* Remove a margem direita do botão de cancelar */
+}
+
+/* Estilo dos campos de entrada */
+.input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: #1f2937;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Adiciona uma borda leve */
+  transition: border-color 0.3s ease;
+}
+
+/* Estilo para quando o campo está em foco (selecionado) */
+.input:focus, textarea:focus {
+  outline: none;
+  border-color: #e6007e; /* Destaca a borda quando o campo é focado */
+  box-shadow: 0 0 5px rgba(230, 0, 126, 0.5); /* Adiciona um brilho ao focar */
+}
+
+/* Cor de fundo do body */
+body {
+  background: radial-gradient(circle at top left, #111827, #0f172a);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo da borda no form */
+#formContainer {
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo escuro com opacidade */
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda suave */
+  box-shadow: 0 0 25px rgba(230, 0, 126, 0.3);
+}
+
+/* Ajustes no título do formulário */
+#formTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e6007e;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Efeitos do texto neon */
+.neon {
+  color: #e6007e;
+  text-shadow: 0 0 5px #e6007e, 0 0 10px #e6007e, 0 0 20px #ff1493;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 5px #e6007e, 0 0 10px #e6007e, 0 0 20px #e6007e;
+  }
+  50% {
+    text-shadow: 0 0 10px #ff2fa2, 0 0 20px #ff2fa2, 0 0 30px #ff2fa2;
+  }
+  100% {
+    text-shadow: 0 0 5px #e6007e, 0 0 10px #e6007e, 0 0 20px #e6007e;
+  }
+}
+
+/* Ajustes de layout geral */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top left, #111827, #0f172a);
+}
+
+.glass {
+  background-color: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 25px rgba(230, 0, 126, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.glass:hover {
+  transform: scale(1.01);
+}

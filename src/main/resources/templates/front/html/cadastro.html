@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro - MyDrugs</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="glass rounded-2xl shadow-2xl p-10 max-w-md w-full">
+    <h1 class="text-3xl neon font-bold mb-6 text-center">Cadastro</h1>
+    <form id= "cadastroForm" class="space-y-4">
+      <div>
+        <label class="text-white">Nome</label>
+        <input id="nome" type="text" class="input" placeholder="Seu nome" />
+      </div>
+      <div>
+        <label class="text-white" >Email</label>
+        <input id="email" type="email" class="input" placeholder="exemplo@email.com" />
+      </div>
+      <div>
+        <label class="text-white">Telefone</label>
+        <input id="telefone" type="tel" class="input" placeholder="(00) 00000-0000" />
+      </div>
+      <div>
+        <label class="text-white">Senha</label>
+        <input id="senha" type="password" class="input" placeholder="••••••••" />
+      </div>
+      <div>
+        <label class="text-white" >Confirmar Senha</label>
+        <input id="confirmarSenha" type="password" class="input" placeholder="••••••••" />
+      </div>
+      <button type="submit" class="btn">Cadastrar</button>
+    </form>
+    <p class="text-center text-gray-400 mt-4 text-sm">
+      Já tem uma conta? 
+      <a href="login.html" class="text-pink-400 hover:underline">Login</a>
+    </p>
+  </div>
+</body>
+<script src="cadastro.js"></script>
+</html>

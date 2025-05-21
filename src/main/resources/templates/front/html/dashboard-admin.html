@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - MyDrugs</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="flex items-center justify-center min-h-screen">
+  <div class="glass rounded-2xl shadow-2xl p-10 max-w-lg w-full">
+    <h1 class="text-4xl neon font-bold mb-6 text-center">Bem-vindo ao MyDrugs</h1>
+
+    <div class="text-center mb-8">
+      <p class="text-white">Você está logado!</p>
+      <p class="text-white text-sm">Explore as opções abaixo para gerenciar seu negócio.</p>
+    </div>
+
+    <!-- Opções do Dashboard -->
+    <div class="space-y-6">
+      <a href="admin-produtos.html" class="btn">Gerenciar Produtos</a>
+      <a href="pedidos" class="btn">Ver Pedidos</a>
+      <a href="clientes" class="btn">Gerenciar Clientes</a>
+      <a href="configuracoes" class="btn">Configurações</a>
+    </div>
+
+    <div class="text-center mt-6">
+      <a href="/logout" class="text-pink-400 hover:underline">Sair</a>
+    </div>
+  </div>
+</body>
+<script src="dashboard-admin.js"></script>
+</html>

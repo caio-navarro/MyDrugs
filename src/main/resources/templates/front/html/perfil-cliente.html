@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil do Cliente - MyDrugs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="min-h-screen flex items-center justify-center">
+  <div class="glass p-8 rounded-2xl max-w-xl w-full shadow-2xl text-white">
+    <h1 class="text-3xl neon text-center mb-6">Meu Perfil</h1>
+
+    <form id="formPerfil" class="space-y-4">
+      <div>
+        <label>Nome</label>
+        <input type="text" id="nome" class="input" placeholder="Seu nome" required />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" id="email" class="input" placeholder="exemplo@email.com" required />
+      </div>
+      <div>
+        <label>Telefone</label>
+        <input type="tel" id="telefone" class="input" placeholder="(00) 00000-0000" required />
+      </div>
+
+      <h2 class="text-xl font-semibold mt-6 mb-2">Endereço</h2>
+      <div>
+        <label>Rua / Logradouro</label>
+        <input type="text" id="rua" class="input" placeholder="Rua Exemplo" required />
+      </div>
+      <div class="flex gap-2">
+        <div class="w-1/2">
+          <label>Número</label>
+          <input type="text" id="numero" class="input" placeholder="123" required />
+        </div>
+        <div class="w-1/2">
+          <label>CEP</label>
+          <input type="text" id="cep" class="input" placeholder="00000-000" required />
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <div class="w-1/2">
+          <label>Cidade</label>
+          <input type="text" id="cidade" class="input" placeholder="São Paulo" required />
+        </div>
+        <div class="w-1/2">
+          <label>Estado</label>
+          <input type="text" id="estado" class="input" placeholder="SP" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn w-full mt-4">Salvar Alterações</button>
+    </form>
+
+    <div class="text-center mt-4">
+      <a href="dashboard-cliente.html" class="text-pink-400 hover:underline">Voltar</a>
+    </div>
+  </div>
+
+  <script>
+   
+  </script>
+</body>
+
+</html>

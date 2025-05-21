@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minhas Compras - MyDrugs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-black text-white p-6">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl neon text-center mb-8">Histórico de Compras</h1>
+
+    <div id="comprasContainer" class="space-y-6">
+      <!-- Compras antigas renderizadas via JS -->
+    </div>
+  </div>
+
+  <script>
+    const compras = [
+      {
+        data: "12/04/2025",
+        produtos: [
+          { nome: "LSD Ultra", preco: 89.00 },
+          { nome: "Docinho Pop", preco: 29.99 }
+        ]
+      },
+      {
+        data: "05/04/2025",
+        produtos: [
+          { nome: "Cristal X", preco: 120.00 }
+        ]
+      }
+    ];
+
+    const container = document.getElementById("comprasContainer");
+
+    compras.forEach(compra => {
+      const div = document.createElement("div");
+      div.className = "glass p-5 rounded-xl";
+
+      let total = compra.produtos.reduce((acc, p) => acc + p.preco, 0);
+
+      div.innerHTML = `
+        <h2 class="text-xl font-bold mb-2">Compra em ${compra.data}</h2>
+        <ul class="mb-2 list-disc list-inside">
+          ${compra.produtos.map(p => `<li>${p.nome} - R$ ${p.preco.toFixed(2)}</li>`).join('')}
+        </ul>
+        <p class="font-semibold text-pink-400">Total: R$ ${total.toFixed(2)}</p>
+      `;
+
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>

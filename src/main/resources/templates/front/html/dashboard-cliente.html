@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard do Cliente - MyDrugs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-black text-white">
+  <div class="max-w-6xl w-full p-6 relative">
+
+    <!-- Ícones do topo -->
+    <div class="absolute top-6 right-6 flex space-x-6 items-center">
+
+      <!-- Ícone do Perfil -->
+      <a href="perfil-cliente.html" title="Perfil do Usuário" class="hover:scale-110 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-500 hover:text-pink-300" fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+        </svg>
+      </a>
+
+      <!-- Ícone do Carrinho -->
+      <a href="carrinho.html" title="Carrinho" class="hover:scale-110 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-500 hover:text-pink-300" fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.16 14.26l.94-1.68h8.59c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.13-.3.13-.46 0-.55-.45-1-1-1H5.21L4.27 2H1v2h2l3.6 6.59-1.35 2.45C4.52 13.37 5.48 15 7 15h12v-2H7.42c-.14 0-.25-.11-.26-.24l.01-.11z" />
+        </svg>
+      </a>
+
+      <!-- Ícone de Minhas Compras -->
+      <a href="minhas-compras.html" title="Minhas Compras" class="hover:scale-110 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-500 hover:text-pink-300" fill="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            d="M12 2L4 5v6c0 5.25 3.5 9.74 8 10 4.5-.26 8-4.75 8-10V5l-8-3zm0 2.18L17.6 6 12 7.82 6.4 6 12 4.18zM6 8.25l6 1.64 6-1.64V11c0 4.1-2.5 7.62-6 7.93-3.5-.31-6-3.83-6-7.93V8.25z" />
+        </svg>
+      </a>
+
+    </div>
+
+    <h1 class="text-4xl neon text-center mb-10">Catálogo MyDrugs</h1>
+
+    <!-- Produtos disponíveis -->
+    <div id="produtoContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Produtos adicionados via JS -->
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="index.html" class="text-pink-400 hover:underline">Sair</a>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById("produtoContainer");
+
+    fetch("http://localhost:8080/droga/listar")
+      .then(response => response.json())
+      .then(drogas => {
+        drogas.forEach(droga => {
+          const card = document.createElement("div");
+          card.className = "glass p-5 rounded-xl text-white shadow-xl";
+
+          card.innerHTML = `
+            <img src="${droga.imagemUrl}" alt="${droga.nome}" class="w-full h-48 object-cover rounded-lg mb-4 border border-pink-500">
+            <h2 class="text-xl font-bold neon mb-2">${droga.nome}</h2>
+            <p class="mb-2">${droga.descricao}</p>
+            <p class="mb-4 font-semibold text-pink-400">R$ ${droga.valor.toFixed(2)}</p>
+            <button class="btn">Comprar</button>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(error => {
+        console.error("Erro ao buscar produtos:", error);
+        container.innerHTML = `<p class="text-red-500">Erro ao carregar os produtos.</p>`;
+      });
+  </script>
+
+</body>
+
+</html>

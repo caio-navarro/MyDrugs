@@ -1,0 +1,49 @@
+<!-- carrinho.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho - MyDrugs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-black text-white p-6">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl neon text-center mb-8">Meu Carrinho</h1>
+
+    <div id="carrinhoContainer" class="space-y-4">
+      <!-- Produtos no carrinho adicionados via JS -->
+    </div>
+
+    <div class="mt-10 text-right">
+      <p class="text-xl font-semibold mb-4">Total: <span id="total" class="text-pink-400">R$ 0,00</span></p>
+      <button class="btn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script>
+    // Simulando itens no carrinho
+    const carrinho = [
+      { nome: "Ecstasy Premium", preco: 49.99 },
+      { nome: "Skunk Gold", preco: 69.90 }
+    ];
+
+    const container = document.getElementById("carrinhoContainer");
+    const totalEl = document.getElementById("total");
+    let total = 0;
+
+    carrinho.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "glass p-4 rounded-xl flex justify-between items-center";
+      div.innerHTML = `
+        <span>${item.nome}</span>
+        <span class="text-pink-400 font-bold">R$ ${item.preco.toFixed(2)}</span>
+      `;
+      total += item.preco;
+      container.appendChild(div);
+    });
+
+    totalEl.textContent = `R$ ${total.toFixed(2)}`;
+  </script>
+</body>
+</html>
