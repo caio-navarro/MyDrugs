@@ -16,7 +16,7 @@ Nenhuma substância real é comercializada, mencionada com fins comerciais, ou s
 ---
 
 
-## 🛠️ Tecnologias Utilizadas / Technologies Used
+## 🛠️ Tecnologias Utilizadas
 
 - Java / Spring Boot
 - HTML / CSS / JavaScript
