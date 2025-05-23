@@ -1,18 +1,8 @@
 package com.site.mydrugs.models;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clientes")
@@ -35,8 +25,8 @@ public class ClienteModels {
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "status")
-    private String status = "ativo";
+    @Column(name = "enabled")
+    private boolean enabled = true;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco_cliente", insertable = false, updatable = false)
@@ -45,9 +35,16 @@ public class ClienteModels {
     @Column(name = "id_endereco_cliente")
     private Integer idEnderecoCliente;
 
-    private String roles;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<PapelModels> papeis = new ArrayList<>();
 
     public ClienteModels() {
+    }
+
+    public ClienteModels(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
     }
 
     public Integer getIdCliente() {
@@ -58,12 +55,12 @@ public class ClienteModels {
         this.idCliente = idCliente;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getNome() {
@@ -114,14 +111,11 @@ public class ClienteModels {
         this.idEnderecoCliente = idEnderecoCliente;
     }
 
-    public String getRoles() {
-        return roles;
+    public List<PapelModels> getPapeis() {
+        return papeis;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setPapeis(List<PapelModels> papeis) {
+        this.papeis = papeis;
     }
-
-    
-    
 }

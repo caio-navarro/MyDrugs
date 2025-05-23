@@ -2,6 +2,11 @@ package com.site.mydrugs.entities;
 
 import com.site.mydrugs.models.ClienteModels;
 import com.site.mydrugs.models.EnderecoClienteModels;
+import com.site.mydrugs.models.PapelModels;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cliente {
 
@@ -10,20 +15,22 @@ public class Cliente {
     private String email;
     private String telefone;
     private String senha;
-    private String status = "ativo";
+    private List<String> papeis;
+    private boolean enabled = true;
     private EnderecoClienteModels endereco;
     private Integer idEnderecoCliente;
 
     public Cliente() {
     }
 
-    public Cliente(String nome, String email, String telefone, String senha, String status,
+    public Cliente(String nome, String email, List<String> papeis, String telefone, String senha, boolean enabled,
             EnderecoClienteModels endereco, Integer idEnderecoCliente) {
         this.nome = nome;
         this.email = email;
+        this.papeis = papeis;
         this.telefone = telefone;
         this.senha = senha;
-        this.status = status;
+        this.enabled = enabled;
         this.endereco = endereco;
         this.idEnderecoCliente = idEnderecoCliente;
     }
@@ -33,13 +40,24 @@ public class Cliente {
 
         cliente.setIdCliente(clienteModels.getIdCliente());
         cliente.setNome(clienteModels.getNome());
-
         cliente.setEmail(clienteModels.getEmail());
-
         cliente.setTelefone(clienteModels.getTelefone());
-        
         cliente.setIdEnderecoCliente(clienteModels.getIdEnderecoCliente());
         cliente.setEndereco(clienteModels.getEndereco());
+        cliente.setSenha(clienteModels.getSenha());
+
+        // Protegendo contra null
+        if (clienteModels.getPapeis() != null) {
+            cliente.setPapeis(
+                    clienteModels.getPapeis()
+                            .stream()
+                            .map(PapelModels::getPapel)
+                            .collect(Collectors.toList())
+            );
+        } else {
+            cliente.setPapeis(new ArrayList<>());
+        }
+
         return cliente;
     }
 
@@ -98,6 +116,14 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public List<String> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<String> papeis) {
+        this.papeis = papeis;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -106,12 +132,12 @@ public class Cliente {
         this.senha = senha;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public EnderecoClienteModels getEndereco() {
@@ -130,6 +156,4 @@ public class Cliente {
         this.idEnderecoCliente = idEnderecoCliente;
     }
 
-
-    
 }

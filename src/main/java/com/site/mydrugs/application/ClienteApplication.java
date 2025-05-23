@@ -2,6 +2,9 @@ package com.site.mydrugs.application;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.site.mydrugs.models.PapelModels;
+import com.site.mydrugs.repositories.PapelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,38 +20,44 @@ import com.site.mydrugs.repositories.EnderecoClienteRepository;
 public class ClienteApplication {
 
     @Autowired
-    ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     @Autowired
-    EnderecoClienteRepository enderecoRepository;
+    private EnderecoClienteRepository enderecoRepository;
+
+    @Autowired
+    private PapelRepository papelRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     public ResponseEntity<?> cadastrar(ClienteModels clienteModels) {
         try {
             Cliente cliente = Cliente.toCliente(clienteModels);
             cliente.validar();
 
-            clienteModels.setSenha(passwordEncoder.encode(clienteModels.getSenha()));
+            ClienteModels clienteSecurity = new ClienteModels(
+                    cliente.getNome(),
+                    cliente.getEmail(),
+                    cliente.getSenha());
 
-            if (clienteModels.getRoles() == null || clienteModels.getRoles().isEmpty()) {
-                clienteModels.setRoles("USER");
-            } else {
-                if (!clienteModels.getRoles().contains("USER")) {
-                    String rolesAtualizadas = clienteModels.getRoles();
-                    clienteModels.setRoles(rolesAtualizadas);
-                }
-            }
+            // Codificar a senha SEM o prefixo {bcrypt}
+            // O Spring Security vai gerenciar isso automaticamente
+            clienteSecurity.setSenha(passwordEncoder.encode(clienteSecurity.getSenha()));
 
-            clienteRepository.save(clienteModels);
+            clienteRepository.save(clienteSecurity);
+
+            PapelModels papel = new PapelModels();
+            papel.setPapel("ROLE_USUARIO");  // papel fixo, padrão
+            papel.setIdCliente(clienteSecurity.getIdCliente());
+
+            papelRepository.save(papel);
 
             return ResponseEntity.ok("Cadastrado com sucesso!");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro inesperado no servidor.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro inesperado no servidor." + e.getMessage());
         }
     }
 
@@ -118,6 +127,15 @@ public class ClienteApplication {
 
     public String login(ClienteModels cliente) {
         Optional<ClienteModels> clienteEncontrado = this.buscarPorEmail(cliente.getEmail());
+
+        if (clienteEncontrado.isPresent()) {
+            ClienteModels clienteDb = clienteEncontrado.get();
+
+            // Verificar se a senha fornecida confere com a senha criptografada no banco
+            if (passwordEncoder.matches(cliente.getSenha(), clienteDb.getSenha())) {
+                return "Login realizado com sucesso!";
+            }
+        }
 
         return "Credenciais inválidas!";
     }
